@@ -1,0 +1,5 @@
+id,url,status,timeMs,found,error
+901071413,https://app.udeki.com/login?id/901071413,200,5376,NO,
+"901071413","https://app.udeki.com/login?id901071413",200,2668,"SI",""
+"901071413","https://app.udeki.com/login?id901071413",200,1853,"SI","Bienvenido a Udeki"
+"901071413","https://app.udeki.com/login?id=901071413",200,4116,"NO","Bienvenido a CENTRO NACIONAL DE PROGRAMAS TECNICOS CENPROT"

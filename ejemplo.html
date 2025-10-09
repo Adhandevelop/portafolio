@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pruebas de Rutas</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="titulo">Página principal 🏠</h1>
+  <p id="rutaActual"></p>
+
+  <div>
+    <button onclick="navegar('hola')">Ir a /hola</button>
+    <button onclick="navegar('buenos')">Ir a /buenos</button>
+    <button onclick="navegar('dias')">Ir a /dias</button>
+    <button onclick="navegar('')">Volver al inicio</button>
+  </div>
+
+  <script>
+    // Muestra el contenido según la "ruta"
+    function mostrarContenido() {
+      const ruta = window.location.pathname;
+      const partes = ruta.split('/');
+      const ultimaParte = partes.pop() || partes.pop(); // maneja "/"
+
+      const titulo = document.getElementById('titulo');
+      const rutaActual = document.getElementById('rutaActual');
+      rutaActual.textContent = `Ruta actual: ${ruta}`;
+
+      switch (ultimaParte) {
+        case 'hola':
+          titulo.textContent = 'Página de Hola 👋';
+          break;
+        case 'buenos':
+          titulo.textContent = 'Página de Buenos ☀️';
+          break;
+        case 'dias':
+          titulo.textContent = 'Página de Días 🌞';
+          break;
+        default:
+          titulo.textContent = 'Página principal 🏠';
+          break;
+      }
+    }
+
+    // Cambia la URL sin recargar usando history.pushState
+    function navegar(ruta) {
+      const nuevaRuta = ruta ? `/${ruta}` : '/';
+      history.pushState({}, '', nuevaRuta);
+      mostrarContenido();
+    }
+
+    // Detectar cuando el usuario usa los botones de atrás/adelante del navegador
+    window.addEventListener('popstate', mostrarContenido);
+
+    // Mostrar contenido inicial
+    mostrarContenido();
+  </script>
+</body>
+</html>
