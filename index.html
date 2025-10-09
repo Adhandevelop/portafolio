@@ -674,18 +674,20 @@
                         </div>
 
                         <div class="cv-section">
-                            <h4><i class="fas fa-graduation-cap"></i> Formación Académica</h4>
+                            <h4><i class="fas fa-graduation-cap"></i> Educación</h4>
                             <div class="cv-item">
-                                <strong>Ingeniería en Sistemas</strong> - Octavo Semestre (En curso)
-                                <p>Universidad. Enfoque en desarrollo de software, bases de datos y arquitectura de sistemas.</p>
+                                <strong>Ingeniería en Sistemas</strong> - Octavo Semestre
+                                <p>Universidad - 4 años de experiencia desarrollando proyectos académicos y personales.</p>
                             </div>
                             <div class="cv-item">
-                                <strong>Técnico en Mantenimiento de Sistemas Eléctricos y de Computadores</strong> - SENA (Graduado)
-                                <p>Servicio Nacional de Aprendizaje. Especialización en mantenimiento de equipos eléctricos y sistemas de cómputo.</p>
+                                <strong>Técnico en Sistemas orientado en Mantenimiento de Computadores</strong>
+                                <p>SENA - Formación técnica en soporte y mantenimiento de equipos de cómputo.</p>
                             </div>
-                        </div>
-
-                        <div class="cv-section">
+                            <div class="cv-item">
+                                <strong>Técnico Electricista Industrial</strong>
+                                <p>Instituto Agroindustrial - Especialización en sistemas eléctricos industriales.</p>
+                            </div>
+                        </div>                        <div class="cv-section">
                             <h4><i class="fas fa-code"></i> Habilidades Técnicas - Desarrollo</h4>
                             <div class="cv-skills">
                                 <span>JavaScript</span>
@@ -905,12 +907,22 @@
 
             doc.setFontSize(12);
             doc.setFont(undefined, 'bold');
-            doc.text('Técnico en Mantenimiento de Sistemas Eléctricos y de Computadores - SENA (Graduado)', margin, yPosition);
+            doc.text('Técnico en Sistemas orientado en Mantenimiento de Computadores - SENA (Graduado)', margin, yPosition);
             yPosition += 6;
 
             doc.setFontSize(11);
             doc.setFont(undefined, 'normal');
-            doc.text('Especialización en mantenimiento de equipos eléctricos y sistemas de cómputo.', margin, yPosition);
+            doc.text('Formación técnica en soporte y mantenimiento de equipos de cómputo.', margin, yPosition);
+            yPosition += 8;
+
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Técnico Electricista Industrial - Instituto Agroindustrial (Graduado)', margin, yPosition);
+            yPosition += 6;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            doc.text('Especialización en sistemas eléctricos industriales y mantenimiento.', margin, yPosition);
             yPosition += 15;
 
             // Habilidades Técnicas
