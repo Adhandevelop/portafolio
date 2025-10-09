@@ -653,32 +653,40 @@
                     <div class="cv-card">
                         <div class="cv-header">
                             <h3>Adham Cubillos</h3>
-                            <p>Desarrollador Backend & Estudiante de Ingeniería en Sistemas</p>
+                            <p>Desarrollador Backend | Electricista Industrial | Técnico en Sistemas</p>
                         </div>
                         
                         <div class="cv-section">
                             <h4><i class="fas fa-user"></i> Perfil Profesional</h4>
-                            <p>Estudiante de Ingeniería en Sistemas en octavo semestre con 4 años de experiencia en desarrollo de proyectos personales y 8 meses como Desarrollador Junior.</p>
+                            <p>Profesional multidisciplinario con formación técnica y universitaria. Electricista Industrial y Técnico en Sistemas SENA, actualmente estudiante de Ingeniería en Sistemas (octavo semestre). Experiencia en desarrollo de software backend (8 meses) y trabajos freelance en electricidad y mantenimiento industrial.</p>
                         </div>
 
                         <div class="cv-section">
-                            <h4><i class="fas fa-briefcase"></i> Experiencia</h4>
+                            <h4><i class="fas fa-briefcase"></i> Experiencia Profesional</h4>
                             <div class="cv-item">
-                                <strong>Desarrollador Junior</strong> - 8 meses
-                                <p>Desarrollo backend, APIs RESTful y sistemas de gestión empresarial.</p>
+                                <strong>Desarrollador Backend Junior</strong> - Colpegasus SAS (8 meses)
+                                <p>Desarrollo de sistemas backend, APIs RESTful, gestión de bases de datos y automatización de procesos empresariales.</p>
+                            </div>
+                            <div class="cv-item">
+                                <strong>Electricista y Técnico de Mantenimiento</strong> - Freelancer
+                                <p>Trabajos independientes en instalaciones eléctricas industriales, mantenimiento preventivo y correctivo de equipos.</p>
                             </div>
                         </div>
 
                         <div class="cv-section">
-                            <h4><i class="fas fa-graduation-cap"></i> Educación</h4>
+                            <h4><i class="fas fa-graduation-cap"></i> Formación Académica</h4>
                             <div class="cv-item">
-                                <strong>Ingeniería en Sistemas</strong> - Octavo Semestre
-                                <p>4 años de experiencia desarrollando proyectos académicos y personales.</p>
+                                <strong>Ingeniería en Sistemas</strong> - Octavo Semestre (En curso)
+                                <p>Universidad. Enfoque en desarrollo de software, bases de datos y arquitectura de sistemas.</p>
+                            </div>
+                            <div class="cv-item">
+                                <strong>Técnico en Mantenimiento de Sistemas Eléctricos y de Computadores</strong> - SENA (Graduado)
+                                <p>Servicio Nacional de Aprendizaje. Especialización en mantenimiento de equipos eléctricos y sistemas de cómputo.</p>
                             </div>
                         </div>
 
                         <div class="cv-section">
-                            <h4><i class="fas fa-code"></i> Habilidades Técnicas</h4>
+                            <h4><i class="fas fa-code"></i> Habilidades Técnicas - Desarrollo</h4>
                             <div class="cv-skills">
                                 <span>JavaScript</span>
                                 <span>Python</span>
@@ -688,6 +696,18 @@
                                 <span>Git</span>
                                 <span>AWS</span>
                                 <span>Azure</span>
+                            </div>
+                        </div>
+
+                        <div class="cv-section">
+                            <h4><i class="fas fa-tools"></i> Habilidades Técnicas - Electricidad</h4>
+                            <div class="cv-skills">
+                                <span>Instalaciones Eléctricas</span>
+                                <span>Mantenimiento Industrial</span>
+                                <span>Automatización</span>
+                                <span>Control de Procesos</span>
+                                <span>Tableros Eléctricos</span>
+                                <span>Sistemas de Potencia</span>
                             </div>
                         </div>
                     </div>
@@ -821,7 +841,7 @@
 
             doc.setFontSize(14);
             doc.setFont(undefined, 'normal');
-            doc.text('Desarrollador Backend & Estudiante de Ingeniería en Sistemas', margin, yPosition);
+            doc.text('Desarrollador Backend | Electricista Industrial | Técnico en Sistemas', margin, yPosition);
             yPosition += 20;
 
             // Perfil Profesional
@@ -832,7 +852,7 @@
 
             doc.setFontSize(11);
             doc.setFont(undefined, 'normal');
-            const profileText = 'Estudiante de Ingeniería en Sistemas en octavo semestre con 4 años de experiencia en desarrollo de proyectos personales y 8 meses como Desarrollador Junior.';
+            const profileText = 'Profesional multidisciplinario con formación técnica y universitaria. Electricista Industrial y Técnico en Sistemas SENA, actualmente estudiante de Ingeniería en Sistemas (octavo semestre). Experiencia en desarrollo de software backend (8 meses) y trabajos freelance en electricidad y mantenimiento industrial.';
             const splitProfile = doc.splitTextToSize(profileText, 170);
             doc.text(splitProfile, margin, yPosition);
             yPosition += splitProfile.length * 5 + 10;
@@ -840,33 +860,57 @@
             // Experiencia
             doc.setFontSize(16);
             doc.setFont(undefined, 'bold');
-            doc.text('Experiencia', margin, yPosition);
+            doc.text('Experiencia Profesional', margin, yPosition);
             yPosition += 8;
 
             doc.setFontSize(12);
             doc.setFont(undefined, 'bold');
-            doc.text('Desarrollador Junior - 8 meses', margin, yPosition);
+            doc.text('Desarrollador Backend Junior - Colpegasus SAS (8 meses)', margin, yPosition);
             yPosition += 6;
 
             doc.setFontSize(11);
             doc.setFont(undefined, 'normal');
-            doc.text('Desarrollo backend, APIs RESTful y sistemas de gestión empresarial.', margin, yPosition);
+            doc.text('Desarrollo de sistemas backend, APIs RESTful, gestión de bases de datos y', margin, yPosition);
+            yPosition += 5;
+            doc.text('automatización de procesos empresariales.', margin, yPosition);
+            yPosition += 10;
+
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Electricista y Técnico de Mantenimiento - Freelancer', margin, yPosition);
+            yPosition += 6;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            doc.text('Trabajos independientes en instalaciones eléctricas industriales,', margin, yPosition);
+            yPosition += 5;
+            doc.text('mantenimiento preventivo y correctivo de equipos.', margin, yPosition);
             yPosition += 15;
 
             // Educación
             doc.setFontSize(16);
             doc.setFont(undefined, 'bold');
-            doc.text('Educación', margin, yPosition);
+            doc.text('Formación Académica', margin, yPosition);
             yPosition += 8;
 
             doc.setFontSize(12);
             doc.setFont(undefined, 'bold');
-            doc.text('Ingeniería en Sistemas - Octavo Semestre', margin, yPosition);
+            doc.text('Ingeniería en Sistemas - Octavo Semestre (En curso)', margin, yPosition);
             yPosition += 6;
 
             doc.setFontSize(11);
             doc.setFont(undefined, 'normal');
-            doc.text('4 años de experiencia desarrollando proyectos académicos y personales.', margin, yPosition);
+            doc.text('Universidad. Enfoque en desarrollo de software, bases de datos y arquitectura de sistemas.', margin, yPosition);
+            yPosition += 8;
+
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Técnico en Mantenimiento de Sistemas Eléctricos y de Computadores - SENA (Graduado)', margin, yPosition);
+            yPosition += 6;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            doc.text('Especialización en mantenimiento de equipos eléctricos y sistemas de cómputo.', margin, yPosition);
             yPosition += 15;
 
             // Habilidades Técnicas
@@ -875,12 +919,29 @@
             doc.text('Habilidades Técnicas', margin, yPosition);
             yPosition += 8;
 
+            doc.setFontSize(13);
+            doc.setFont(undefined, 'bold');
+            doc.text('Desarrollo de Software:', margin, yPosition);
+            yPosition += 6;
+
             doc.setFontSize(11);
             doc.setFont(undefined, 'normal');
-            const skills = 'JavaScript, Python, Node.js, React, SQL, Git, AWS, Azure, Docker, HTML5';
-            const splitSkills = doc.splitTextToSize(skills, 170);
-            doc.text(splitSkills, margin, yPosition);
-            yPosition += splitSkills.length * 5 + 10;
+            const devSkills = 'JavaScript, Python, Node.js, React, SQL, Git, AWS, Azure, Docker, HTML5';
+            const splitDevSkills = doc.splitTextToSize(devSkills, 170);
+            doc.text(splitDevSkills, margin, yPosition);
+            yPosition += splitDevSkills.length * 5 + 8;
+
+            doc.setFontSize(13);
+            doc.setFont(undefined, 'bold');
+            doc.text('Electricidad y Mantenimiento:', margin, yPosition);
+            yPosition += 6;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            const elecSkills = 'Instalaciones Eléctricas, Mantenimiento Industrial, Automatización, Control de Procesos, Tableros Eléctricos, Sistemas de Potencia';
+            const splitElecSkills = doc.splitTextToSize(elecSkills, 170);
+            doc.text(splitElecSkills, margin, yPosition);
+            yPosition += splitElecSkills.length * 5 + 10;
 
             // Proyectos Destacados
             doc.setFontSize(16);
