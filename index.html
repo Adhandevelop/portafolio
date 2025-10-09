@@ -755,7 +755,7 @@
                             <h4><i class="fas fa-briefcase"></i> Experiencia Profesional</h4>
                             <div class="cv-item">
                                 <strong>Desarrollador Backend Junior</strong> - Colpegasus SAS (8 meses)
-                                <p>Desarrollo de sistemas backend, APIs RESTful, gestión de bases de datos y automatización de procesos empresariales.</p>
+                                <p>Desarrollo de reportes administrativos exportables a PDF con PHP y TCPDF. Automatizaciones en Python y supervisión de sistemas de comunicación con clientes.</p>
                             </div>
                             <div class="cv-item">
                                 <strong>Electricista y Técnico de Mantenimiento</strong> - Freelancer
@@ -833,10 +833,10 @@
             <div class="social-links">
                 <a href="https://co.linkedin.com/in/adhancubillos?trk=people-guest_people_search-card" title="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
                 <a href="https://github.com/Adhandevelop" title="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-                <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="mailto:adhandevelop@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
                 <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
             </div>
-            <p>&copy; 2024 Adham Cubillos. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Adham Cubillos. Todos los derechos reservados.</p>
         </div>
     </footer>
 
@@ -1007,10 +1007,10 @@
 
             doc.setFontSize(11);
             doc.setFont(undefined, 'normal');
-            doc.text('Desarrollo de sistemas backend, APIs RESTful, gestión de bases de datos y', margin, yPosition);
-            yPosition += 5;
-            doc.text('automatización de procesos empresariales.', margin, yPosition);
-            yPosition += 10;
+            const jobDescription = 'Desarrollo de reportes administrativos exportables a PDF con PHP y TCPDF. Automatizaciones en Python y supervisión de sistemas de comunicación con clientes.';
+            const splitJobDesc = doc.splitTextToSize(jobDescription, 170);
+            doc.text(splitJobDesc, margin, yPosition);
+            yPosition += splitJobDesc.length * 5 + 10;
 
             doc.setFontSize(12);
             doc.setFont(undefined, 'bold');
