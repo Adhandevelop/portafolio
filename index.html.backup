@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio - Desarrollador</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #87CEEB;
+            --secondary-color: #ffffff;
+            --text-color: #333333;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --accent-color: #4682B4;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #4682B4;
+            --secondary-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --shadow: rgba(255, 255, 255, 0.1);
+            --accent-color: #87CEEB;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--card-bg);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: white;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(135, 206, 235, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Technologies */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: scale(1.05);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* CV Section */
+        .cv-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .cv-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cv-header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .cv-header h3 {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .cv-header p {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .cv-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .cv-section h4 {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cv-section h4 i {
+            color: var(--primary-color);
+        }
+
+        .cv-item {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .cv-item strong {
+            color: var(--accent-color);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .cv-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .cv-skills span {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .cv-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .cv-download-btn, .cv-print-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            text-decoration: none;
+        }
+
+        .cv-download-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .cv-download-btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(135, 206, 235, 0.4);
+        }
+
+        .cv-print-btn {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .cv-print-btn:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Print styles */
+        @media print {
+            header, nav, footer, .nav-links, .theme-toggle, .cv-actions {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .cv-card {
+                box-shadow: none !important;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+            }
+            
+            .cv-content {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .cv-section {
+                break-inside: avoid;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--card-bg);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(135, 206, 235, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cv-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .cv-actions {
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div></div>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </div>
+            <div class="hero">
+                <h1>Adham Cubillos</h1>
+                <p>Desarrollador Backend & Estudiante de Ingeniería en Sistemas</p>
+                <a href="#contacto" class="cta-button">Contáctame</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#sobre-mi">Sobre Mí</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#tecnologias">Tecnologías</a></li>
+                <li><a href="#plataformas">Plataformas</a></li>
+                <li><a href="#cv">Currículum</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sobre Mí -->
+    <section id="sobre-mi">
+        <div class="container">
+            <h2 class="section-title">Sobre Mí</h2>
+            <div class="about-content">
+                <div class="profile-image">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="about-text">
+                    <p>
+                        Soy Adham Cubillos, estudiante de Ingeniería en Sistemas cursando octavo semestre con una sólida experiencia de 4 años desarrollando proyectos personales y académicos. Actualmente me desempeño como Desarrollador Junior con 8 meses de experiencia profesional.
+                    </p>
+                    <p>
+                        Mi especialización se centra en el desarrollo backend, donde he construido soluciones web escalables y sistemas de gestión empresarial. Me apasiona el trabajo en equipo y la colaboración multidisciplinaria, siempre buscando crear valor a través de la tecnología.
+                    </p>
+                    <p>
+                        Soy una persona en constante aprendizaje, siempre dispuesto a explorar nuevas tecnologías y metodologías. Mi curiosidad me impulsa a mantenerme actualizado con las últimas tendencias del desarrollo de software y las mejores prácticas de la industria.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section id="proyectos">
+        <div class="container">
+            <h2 class="section-title">Proyectos Destacados</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Páginas Web para Tiendas Personalizables</h3>
+                    <p>Desarrollo de sitios web adaptativos para comercios locales con sistemas de gestión de productos, catálogos personalizables y interfaces intuitivas para pequeñas y medianas empresas.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h3>Sistema de Gestión para Bodega</h3>
+                    <p>Aplicación web completa para administración de inventarios con panel de control, generación de gráficas estadísticas, gestión de productos y reportes automatizados en tiempo real.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3>Herramientas de Transformación de Datos</h3>
+                    <p>Scripts y aplicaciones en Python para procesamiento, análisis y transformación de datos. Automatización de tareas de limpieza de datos y generación de reportes para análisis empresarial.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Proyectos de Desarrollo Backend</h3>
+                    <p>APIs RESTful, sistemas de autenticación, bases de datos y arquitecturas backend escalables. Experiencia en desarrollo de servicios web robustos y seguros.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tecnologías -->
+    <section id="tecnologias">
+        <div class="container">
+            <h2 class="section-title">Tecnologías</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fab fa-js-square"></i></div>
+                    <h4>JavaScript</h4>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fab fa-python"></i></div>
+                    <h4>Python</h4>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fab fa-react"></i></div>
+                    <h4>React</h4>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fab fa-node-js"></i></div>
+                    <h4>Node.js</h4>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fas fa-database"></i></div>
+                    <h4>SQL</h4>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fab fa-docker"></i></div>
+                    <h4>Docker</h4>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fab fa-git-alt"></i></div>
+                    <h4>Git</h4>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fab fa-html5"></i></div>
+                    <h4>HTML5</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plataformas -->
+    <section id="plataformas">
+        <div class="container">
+            <h2 class="section-title">Plataformas & Herramientas</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <h3>Amazon Web Services</h3>
+                    <p>Experiencia en despliegue y gestión de aplicaciones en AWS, incluyendo EC2, S3, RDS, Lambda y otros servicios cloud para desarrollo backend escalable.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Vercel</h3>
+                    <p>Plataforma de despliegue para aplicaciones web modernas con integración continua, optimización automática y escalado global para proyectos frontend y fullstack.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>Control de Versiones</h3>
+                    <p>Manejo avanzado de Git, GitHub y GitLab para colaboración en equipo y gestión de código fuente en proyectos individuales y colaborativos.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <h3>Microsoft Azure</h3>
+                    <p>Experiencia con servicios de Azure para hospedar aplicaciones, bases de datos en la nube y servicios de integración para soluciones empresariales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Section -->
+    <section id="cv">
+        <div class="container">
+            <h2 class="section-title">Currículum Vitae</h2>
+            <div class="cv-content">
+                <div class="cv-preview">
+                    <div class="cv-card">
+                        <div class="cv-header">
+                            <h3>Adham Cubillos</h3>
+                            <p>Desarrollador Backend | Electricista Industrial | Técnico en Sistemas</p>
+                        </div>
+                        
+                        <div class="cv-section">
+                            <h4><i class="fas fa-user"></i> Perfil Profesional</h4>
+                            <p>Profesional multidisciplinario con formación técnica y universitaria. Electricista Industrial y Técnico en Sistemas SENA, actualmente estudiante de Ingeniería en Sistemas (octavo semestre). Experiencia en desarrollo de software backend (8 meses) y trabajos freelance en electricidad y mantenimiento industrial.</p>
+                        </div>
+
+                        <div class="cv-section">
+                            <h4><i class="fas fa-briefcase"></i> Experiencia Profesional</h4>
+                            <div class="cv-item">
+                                <strong>Desarrollador Backend Junior</strong> - Colpegasus SAS (8 meses)
+                                <p>Desarrollo de sistemas backend, APIs RESTful, gestión de bases de datos y automatización de procesos empresariales.</p>
+                            </div>
+                            <div class="cv-item">
+                                <strong>Electricista y Técnico de Mantenimiento</strong> - Freelancer
+                                <p>Trabajos independientes en instalaciones eléctricas industriales, mantenimiento preventivo y correctivo de equipos.</p>
+                            </div>
+                        </div>
+
+                        <div class="cv-section">
+                            <h4><i class="fas fa-graduation-cap"></i> Educación</h4>
+                            <div class="cv-item">
+                                <strong>Ingeniería en Sistemas</strong> - Octavo Semestre
+                                <p>Universidad - 4 años de experiencia desarrollando proyectos académicos y personales.</p>
+                            </div>
+                            <div class="cv-item">
+                                <strong>Técnico en Sistemas orientado en Mantenimiento de Computadores</strong>
+                                <p>SENA - Formación técnica en soporte y mantenimiento de equipos de cómputo.</p>
+                            </div>
+                            <div class="cv-item">
+                                <strong>Técnico Electricista Industrial</strong>
+                                <p>Instituto Agroindustrial - Especialización en sistemas eléctricos industriales.</p>
+                            </div>
+                        </div>                        <div class="cv-section">
+                            <h4><i class="fas fa-code"></i> Habilidades Técnicas - Desarrollo</h4>
+                            <div class="cv-skills">
+                                <span>JavaScript</span>
+                                <span>Python</span>
+                                <span>Node.js</span>
+                                <span>React</span>
+                                <span>SQL</span>
+                                <span>Git</span>
+                                <span>AWS</span>
+                                <span>Azure</span>
+                            </div>
+                        </div>
+
+                        <div class="cv-section">
+                            <h4><i class="fas fa-tools"></i> Habilidades Técnicas - Electricidad</h4>
+                            <div class="cv-skills">
+                                <span>Instalaciones Eléctricas</span>
+                                <span>Mantenimiento Industrial</span>
+                                <span>Automatización</span>
+                                <span>Control de Procesos</span>
+                                <span>Tableros Eléctricos</span>
+                                <span>Sistemas de Potencia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cv-actions">
+                    <button onclick="generatePDF()" class="cv-download-btn">
+                        <i class="fas fa-download"></i>
+                        Descargar CV (PDF)
+                    </button>
+                    <button onclick="printCV()" class="cv-print-btn">
+                        <i class="fas fa-print"></i>
+                        Imprimir CV
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer/Contacto -->
+    <footer id="contacto">
+        <div class="container">
+            <h2 class="section-title">Contáctame</h2>
+            <div class="social-links">
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2024 Adham Cubillos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (body.hasAttribute('data-theme')) {
+                body.removeAttribute('data-theme');
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card, .tech-item');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // CV Functions
+        function generatePDF() {
+            alert('Función PDF ejecutada. Esta funcionalidad estará disponible pronto. Por ahora puedes usar la opción de imprimir.');
+        }
+
+        function createPDF() {
+            // Intentar múltiples formas de acceder a jsPDF
+            let jsPDF;
+            if (window.jspdf && window.jspdf.jsPDF) {
+                jsPDF = window.jspdf.jsPDF;
+            } else if (window.jsPDF) {
+                jsPDF = window.jsPDF;
+            } else {
+                alert('No se pudo cargar la librería PDF. Usa la opción "Descargar HTML".');
+                return;
+            }
+            
+            const doc = new jsPDF();
+
+            // Configuración
+            const margin = 20;
+            let yPosition = margin;
+
+            // Header
+            doc.setFontSize(24);
+            doc.setFont(undefined, 'bold');
+            doc.text('Adham Cubillos', margin, yPosition);
+            yPosition += 10;
+
+            doc.setFontSize(14);
+            doc.setFont(undefined, 'normal');
+            doc.text('Desarrollador Backend | Electricista Industrial | Técnico en Sistemas', margin, yPosition);
+            yPosition += 20;
+
+            // Perfil Profesional
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Perfil Profesional', margin, yPosition);
+            yPosition += 8;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            const profileText = 'Profesional multidisciplinario con formación técnica y universitaria. Electricista Industrial y Técnico en Sistemas SENA, actualmente estudiante de Ingeniería en Sistemas (octavo semestre). Experiencia en desarrollo de software backend (8 meses) y trabajos freelance en electricidad y mantenimiento industrial.';
+            const splitProfile = doc.splitTextToSize(profileText, 170);
+            doc.text(splitProfile, margin, yPosition);
+            yPosition += splitProfile.length * 5 + 10;
+
+            // Experiencia
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Experiencia Profesional', margin, yPosition);
+            yPosition += 8;
+
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Desarrollador Backend Junior - Colpegasus SAS (8 meses)', margin, yPosition);
+            yPosition += 6;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            doc.text('Desarrollo de sistemas backend, APIs RESTful, gestión de bases de datos y', margin, yPosition);
+            yPosition += 5;
+            doc.text('automatización de procesos empresariales.', margin, yPosition);
+            yPosition += 10;
+
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Electricista y Técnico de Mantenimiento - Freelancer', margin, yPosition);
+            yPosition += 6;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            doc.text('Trabajos independientes en instalaciones eléctricas industriales,', margin, yPosition);
+            yPosition += 5;
+            doc.text('mantenimiento preventivo y correctivo de equipos.', margin, yPosition);
+            yPosition += 15;
+
+            // Educación
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Formación Académica', margin, yPosition);
+            yPosition += 8;
+
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Ingeniería en Sistemas - Octavo Semestre (En curso)', margin, yPosition);
+            yPosition += 6;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            doc.text('Universidad. Enfoque en desarrollo de software, bases de datos y arquitectura de sistemas.', margin, yPosition);
+            yPosition += 8;
+
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Técnico en Sistemas orientado en Mantenimiento de Computadores - SENA (Graduado)', margin, yPosition);
+            yPosition += 6;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            doc.text('Formación técnica en soporte y mantenimiento de equipos de cómputo.', margin, yPosition);
+            yPosition += 8;
+
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Técnico Electricista Industrial - Instituto Agroindustrial (Graduado)', margin, yPosition);
+            yPosition += 6;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            doc.text('Especialización en sistemas eléctricos industriales y mantenimiento.', margin, yPosition);
+            yPosition += 15;
+
+            // Habilidades Técnicas
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Habilidades Técnicas', margin, yPosition);
+            yPosition += 8;
+
+            doc.setFontSize(13);
+            doc.setFont(undefined, 'bold');
+            doc.text('Desarrollo de Software:', margin, yPosition);
+            yPosition += 6;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            const devSkills = 'JavaScript, Python, Node.js, React, SQL, Git, AWS, Azure, Docker, HTML5';
+            const splitDevSkills = doc.splitTextToSize(devSkills, 170);
+            doc.text(splitDevSkills, margin, yPosition);
+            yPosition += splitDevSkills.length * 5 + 8;
+
+            doc.setFontSize(13);
+            doc.setFont(undefined, 'bold');
+            doc.text('Electricidad y Mantenimiento:', margin, yPosition);
+            yPosition += 6;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            const elecSkills = 'Instalaciones Eléctricas, Mantenimiento Industrial, Automatización, Control de Procesos, Tableros Eléctricos, Sistemas de Potencia';
+            const splitElecSkills = doc.splitTextToSize(elecSkills, 170);
+            doc.text(splitElecSkills, margin, yPosition);
+            yPosition += splitElecSkills.length * 5 + 10;
+
+            // Proyectos Destacados
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Proyectos Destacados', margin, yPosition);
+            yPosition += 8;
+
+            const projects = [
+                'Páginas Web para Tiendas Personalizables',
+                'Sistema de Gestión para Bodega con gráficas',
+                'Herramientas de Transformación de Datos en Python',
+                'APIs RESTful y sistemas backend escalables'
+            ];
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            projects.forEach(project => {
+                doc.text('• ' + project, margin, yPosition);
+                yPosition += 6;
+            });
+
+            // Guardar PDF
+            doc.save('CV_Adham_Cubillos.pdf');
+        }
+
+        function printCV() {
+            console.log('Función printCV llamada');
+            try {
+                console.log('Iniciando impresión...');
+                window.print();
+                console.log('window.print() ejecutado');
+            } catch (error) {
+                console.error('Error al imprimir:', error);
+                alert('Error al imprimir. Intenta usar Ctrl+P para imprimir manualmente.');
+            }
+        }
+
+
+    </script>
+</body>
+</html>

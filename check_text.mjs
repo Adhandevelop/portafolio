@@ -4,7 +4,14 @@
 //
 // Uso:
 // node check_text.js --file=numeros.xlsx --col=A --base=https://mi-pagina.com --text="Bienvenido a prueba" --concurrency=2 --rps=0.5 --outfile=resultados.csv
-
+// node check_text.mjs \
+//   --file=numeros_limpios.csv \
+//   --col=A \
+//   --base=https://app.udeki.com/login?id \
+//   --text="Bienvenido a Udeki" \
+//   --concurrency=1 \
+//   --rps= 1  \
+//   --outfile=resultados_3seg.csv
 import fs from 'fs';
 import { promisify } from 'util';
 import xlsx from 'xlsx';
